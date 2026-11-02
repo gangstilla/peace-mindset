@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peace Mindset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Bricolage+Grotesque:wght@300;400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  /* Layout: slow, spacious single column. Hero = lowercase statement beside a guided breathing circle. Then practices as a ruled list, a day in three pauses, a weather check-in, and a prompt. */
+  --bg: #e9eeeb;
+  --surface: #f5f8f6;
+  --line: #cbd6d0;
+  --fg: #17221e;
+  --muted: #526259;
+  --accent: #3b6657;
+  --accent-soft: #c6dacf;
+  --on-accent: #f5f8f6;
+  --f-display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --f-body: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'DM Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1613; --surface: #162019; --line: #26342d; --fg: #e3eae6; --muted: #92a69b;
+    --accent: #93c5ae; --accent-soft: #1f382d; --on-accent: #0e1a14;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1613; --surface: #162019; --line: #26342d; --fg: #e3eae6; --muted: #92a69b;
+  --accent: #93c5ae; --accent-soft: #1f382d; --on-accent: #0e1a14;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+p { margin: 0; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 300; margin: 0; text-wrap: balance; letter-spacing: -0.02em; line-height: 1.02; }
+h2 { font-size: clamp(2.1rem, 5vw, 3.5rem); }
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.eyebrow { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 24px; }
+.mark { font: 600 1.15rem var(--f-display); letter-spacing: -0.01em; text-decoration: none; }
+.nav { display: flex; gap: 6px 22px; flex-wrap: wrap; font-size: 0.92rem; color: var(--muted); }
+.nav a { text-decoration: none; padding: 4px 0; }
+.nav a:hover { color: var(--fg); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 6vw, 88px); align-items: center; padding-block: clamp(24px, 6vw, 72px) clamp(56px, 9vw, 112px); }
+.hero h1 { font-size: clamp(3.1rem, 9vw, 7.4rem); }
+.hero h1 span { color: var(--accent); }
+.lede { margin-top: 28px; max-width: 30em; color: var(--muted); font-size: 1.12rem; }
+.hero-links { margin-top: 30px; display: flex; gap: 12px 26px; flex-wrap: wrap; align-items: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: transparent; color: var(--fg); padding: 12px 24px; border-radius: 999px; font: 500 0.95rem var(--f-body); cursor: pointer; text-decoration: none; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.btn.primary:hover { filter: brightness(1.08); }
+.textlink { color: var(--muted); font-size: 0.95rem; }
+.textlink:hover { color: var(--fg); }
+
+/* Breathing circle */
+.orb-wrap { display: grid; justify-items: center; gap: 22px; }
+.orb { position: relative; width: min(100%, 380px); aspect-ratio: 1; display: grid; place-items: center; }
+.orb::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--line); }
+.orb .core { position: absolute; inset: 14%; border-radius: 50%; background: var(--accent-soft); border: 1px solid var(--accent); transform: scale(var(--s, 0.7)); transition: transform var(--dur, 0s) cubic-bezier(.45,.05,.4,1); }
+.orb.idle .core { animation: drift 10s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: scale(0.66); } to { transform: scale(0.8); } }
+.orb .label { position: relative; text-align: center; }
+.orb .label b { display: block; font: 300 clamp(1.7rem, 4vw, 2.3rem)/1.1 var(--f-display); letter-spacing: -0.02em; }
+.orb .label small { display: block; margin-top: 6px; font: 400 0.7rem var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; min-height: 1.3em; }
+.orb-caption { font-size: 0.88rem; color: var(--muted); text-align: center; max-width: 22em; }
+
+/* Sections */
+.sec { border-top: 1px solid var(--line); padding-block: clamp(52px, 9vw, 112px); }
+.sec-head { display: grid; gap: 16px; max-width: 38em; margin-bottom: 44px; }
+.sec-head .sub { color: var(--muted); font-size: 1.08rem; }
+
+/* Practices */
+.practices { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.practice { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) auto; gap: 8px clamp(20px, 5vw, 64px); align-items: baseline; padding-block: 26px; border-bottom: 1px solid var(--line); }
+.practice h3 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 400; line-height: 1.1; }
+.practice p { color: var(--muted); }
+.practice .time { font: 400 0.78rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+
+/* Three pauses */
+.pauses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 4vw, 56px); position: relative; }
+.pause { position: relative; padding-top: 34px; min-width: 0; }
+.pause::before { content: ""; position: absolute; top: 7px; left: 0; right: calc(-1 * clamp(20px, 4vw, 56px)); height: 1px; background: var(--line); }
+.pause:last-child::before { right: 0; }
+.pause::after { content: ""; position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--accent); }
+.pause .when { font: 400 0.76rem var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.pause h3 { margin-top: 10px; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 400; line-height: 1.12; }
+.pause p { margin-top: 12px; color: var(--muted); }
+
+/* Weather */
+.weather { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(28px, 6vw, 88px); align-items: start; }
+.opts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.opt { font: 500 0.98rem var(--f-body); padding: 10px 20px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.opt:hover { border-color: var(--muted); }
+.opt[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.reading { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px, 4vw, 38px); min-height: 15em; }
+.reading h3 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin-top: 10px; }
+.reading p { margin-top: 14px; color: var(--muted); }
+.reading .try { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--fg); }
+.reading .try b { display: block; font: 500 0.74rem var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.saved { margin-top: 14px; font-size: 0.85rem; color: var(--muted); min-height: 1.4em; }
+
+/* Prompt */
+.prompt-box { display: grid; gap: 28px; max-width: 46em; }
+.prompt-text { font: 300 clamp(1.9rem, 4.6vw, 3.1rem)/1.12 var(--f-display); letter-spacing: -0.02em; text-wrap: balance; min-height: 3.4em; }
+.prompt-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+footer { border-top: 1px solid var(--line); padding-block: 32px 52px; display: grid; gap: 14px; color: var(--muted); font-size: 0.88rem; }
+footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+footer p { max-width: 50em; }
+
+@media (max-width: 880px) {
+  .hero, .weather { grid-template-columns: minmax(0, 1fr); }
+  .practice { grid-template-columns: minmax(0, 1fr); }
+  .pauses { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .pause::before { display: none; }
+  .pause { padding-top: 0; padding-left: 34px; }
+  .pause::after { top: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orb.idle .core { animation: none; }
+  .orb .core { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <a class="mark" href="#top">peace mindset</a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#breathe">Breathe</a>
+    <a href="#practices">Practices</a>
+    <a href="#pauses">Pauses</a>
+    <a href="#weather">Check in</a>
+    <a href="#prompt">Write</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" id="breathe">
+    <div>
+      <p class="eyebrow">A calmer way to think</p>
+      <h1 style="margin-top:20px">slow down enough to <span>hear yourself.</span></h1>
+      <p class="lede">Small practices for a busy head. No streaks, no scores, no pressure to be better by Friday. Take what helps and leave the rest.</p>
+      <div class="hero-links">
+        <a class="btn primary" href="#practices">Find a practice</a>
+        <a class="textlink" href="#weather">How are you today? →</a>
+      </div>
+    </div>
+    <div class="orb-wrap">
+      <div class="orb idle" id="orb">
+        <div class="core" id="core"></div>
+        <div class="label"><b id="orbText">Begin</b><small id="orbSmall">4 in · 4 hold · 6 out</small></div>
+      </div>
+      <button class="btn primary" id="orbBtn" type="button">Begin breathing</button>
+      <p class="orb-caption" id="orbCap">Three minutes is plenty. Stop whenever you like.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="practices">
+    <div class="sec-head">
+      <p class="eyebrow">Practices</p>
+      <h2>Six things that work when your mind won't settle.</h2>
+      <p class="sub">None of these need equipment or experience. Try one for a week before you judge it.</p>
+    </div>
+    <ul class="practices">
+      <li class="practice"><h3>Name it to tame it</h3><p>Say what you feel in one word: "anxious", "irritated", "tired". Putting a label on an emotion tends to lower its intensity.</p><span class="time">30 sec</span></li>
+      <li class="practice"><h3>The long exhale</h3><p>Breathe in twice through the nose, a short sip on top of a full breath, then let it out slowly through the mouth. Two or three rounds settle the body fast.</p><span class="time">1 min</span></li>
+      <li class="practice"><h3>Five things, four, three</h3><p>Name five things you see, four you can touch, three you hear. It pulls attention out of the story in your head and into the room.</p><span class="time">2 min</span></li>
+      <li class="practice"><h3>Schedule the worry</h3><p>Pick a fifteen-minute window each day. When a worry shows up at other times, note it down and tell it to wait until then.</p><span class="time">15 min</span></li>
+      <li class="practice"><h3>One next step</h3><p>When everything feels heavy, write down only the very next physical action. Not the plan, not the outcome. Just the next move.</p><span class="time">2 min</span></li>
+      <li class="practice"><h3>Walk without a phone</h3><p>Ten minutes outside with nothing to listen to or scroll. Let boredom do its work. Ideas and relief often show up around minute seven.</p><span class="time">10 min</span></li>
+    </ul>
+  </section>
+
+  <section class="sec" id="pauses">
+    <div class="sec-head">
+      <p class="eyebrow">A day in three pauses</p>
+      <h2>You don't need an hour. You need three honest minutes.</h2>
+    </div>
+    <div class="pauses">
+      <div class="pause"><span class="when">Morning</span><h3>What matters today?</h3><p>Before the phone, pick one thing that would make today a good day, even if everything else slips.</p></div>
+      <div class="pause"><span class="when">Midday</span><h3>Where is my body holding on?</h3><p>Check your jaw, shoulders and breath. Release what you find. Drink some water.</p></div>
+      <div class="pause"><span class="when">Evening</span><h3>What can I set down?</h3><p>Name one thing you are finished carrying today. Write it down or say it out loud, then leave it there.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="weather">
+    <div class="weather">
+      <div>
+        <p class="eyebrow">Check in</p>
+        <h2 style="margin-top:16px">What's the weather inside right now?</h2>
+        <div class="opts" id="opts" role="group" aria-label="Inner weather"></div>
+        <p class="saved" id="saved" role="status"></p>
+      </div>
+      <div class="reading" id="reading" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="prompt">
+    <div class="prompt-box">
+      <p class="eyebrow">Write for five minutes</p>
+      <p class="prompt-text" id="promptText"></p>
+      <div class="prompt-actions">
+        <button class="btn primary" id="nextPrompt" type="button">Another prompt</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="row">
+    <span>peace mindset</span>
+    <a href="https://github.com/gangstilla/trading-mindset">Sister site: Trading Mindset →</a>
+  </div>
+  <p>These ideas are for general wellbeing and are not medical advice or a substitute for therapy. If you are struggling, please reach out to a doctor, a counsellor or someone you trust. If you are in immediate danger, contact your local emergency number.</p>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* Guided breathing: 4 in, 4 hold, 6 out */
+  var phases = [
+    { name: 'Breathe in', s: 4, scale: 1 },
+    { name: 'Hold', s: 4, scale: 1 },
+    { name: 'Breathe out', s: 6, scale: 0.62 }
+  ];
+  var running = false, timer = null, idx = 0, left = 0, rounds = 0;
+  var orb = $('orb'), core = $('core');
+  function enter(i) {
+    var p = phases[i];
+    idx = i; left = p.s;
+    core.style.setProperty('--dur', (i === 1 ? 0 : p.s) + 's');
+    core.style.setProperty('--s', p.scale);
+    $('orbText').textContent = p.name;
+    $('orbSmall').textContent = left + 's';
+  }
+  function tick() {
+    left -= 1;
+    if (left <= 0) {
+      if (idx === 2) rounds += 1;
+      $('orbCap').textContent = rounds === 1 ? '1 round done. Keep going or stop whenever you like.' : rounds + ' rounds done. Keep going or stop whenever you like.';
+      enter((idx + 1) % 3);
+    } else {
+      $('orbSmall').textContent = left + 's';
+    }
+  }
+  function stop() {
+    running = false; clearInterval(timer);
+    orb.classList.add('idle');
+    core.style.removeProperty('--dur'); core.style.removeProperty('--s');
+    $('orbText').textContent = rounds > 0 ? 'Well done' : 'Begin';
+    $('orbSmall').textContent = '4 in · 4 hold · 6 out';
+    $('orbBtn').textContent = 'Begin breathing';
+    if (rounds === 0) $('orbCap').textContent = 'Three minutes is plenty. Stop whenever you like.';
+  }
+  $('orbBtn').addEventListener('click', function () {
+    if (running) { stop(); return; }
+    running = true; rounds = 0;
+    orb.classList.remove('idle');
+    $('orbBtn').textContent = 'Stop';
+    $('orbCap').textContent = 'Let the circle set the pace. Breathe through your nose if you can.';
+    core.style.setProperty('--s', 0.62);
+    /* start from the small size, then grow */
+    requestAnimationFrame(function () { requestAnimationFrame(function () { enter(0); }); });
+    timer = setInterval(tick, 1000);
+  });
+
+  /* Weather check-in */
+  var W = {
+    'Clear': ['Clear and settled', 'Good. This is a useful moment to do something that needs a steady head, or to simply enjoy it without hunting for what might go wrong.', 'Put it to use', 'Do the one task you have been avoiding for ten minutes while you feel like this.'],
+    'Restless': ['Restless and buzzing', 'Your body has energy with nowhere to go. Thinking harder rarely fixes this. Moving does.', 'Try the long exhale', 'Two sips in, one slow breath out, three rounds. Then walk for ten minutes.'],
+    'Foggy': ['Foggy and slow', 'A foggy head often means you have too much open at once, or not enough rest. It is not a character flaw.', 'Try one next step', 'Write down only the very next physical action, do that, and stop there.'],
+    'Stormy': ['Stormy and loud', 'Strong feeling is not a problem to solve right now. It needs somewhere to go before you decide anything.', 'Name it, then wait', 'Say the feeling in one word. Do not send the message or make the call for twenty minutes.'],
+    'Flat': ['Flat and low', 'Nothing is wrong exactly, but nothing feels good either. Small, physical things help more than big plans.', 'Change the air', 'Step outside, drink a glass of water, and text one person. No need for a big conversation.']
+  };
+  var keys = Object.keys(W);
+  var opts = '';
+  keys.forEach(function (k) { opts += '<button type="button" class="opt" data-k="' + k + '" aria-pressed="false">' + k + '</button>'; });
+  $('opts').innerHTML = opts;
+  function show(k, remembered) {
+    Array.prototype.forEach.call($('opts').children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.k === k)); });
+    if (!k) {
+      $('reading').innerHTML = '<p class="eyebrow">Your reading</p><h3>Pick the closest word.</h3><p>There is no wrong answer. You will get one small thing to try, nothing more.</p>';
+      return;
+    }
+    var w = W[k];
+    $('reading').innerHTML = '<p class="eyebrow">' + k + '</p><h3>' + w[0] + '</h3><p>' + w[1] + '</p><div class="try"><b>' + w[2] + '</b>' + w[3] + '</div>';
+    $('saved').textContent = remembered ? 'Last time you picked this on this device.' : '';
+  }
+  var last = null;
+  try { last = localStorage.getItem('peace-weather'); } catch (e) {}
+  show(last && W[last] ? last : null, !!(last && W[last]));
+  $('opts').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.opt'); if (!b) return;
+    show(b.dataset.k, false);
+    try { localStorage.setItem('peace-weather', b.dataset.k); } catch (e) {}
+  });
+
+  /* Writing prompts */
+  var prompts = [
+    'What would you do today if you trusted that it would be fine?',
+    'What are you carrying that was never yours to carry?',
+    'Describe a moment this week when you felt fully present.',
+    'What do you keep postponing, and what are you afraid it would mean to do it?',
+    'Write to the version of you from one year ago.',
+    'What does enough look like for you right now?',
+    'Who do you feel most like yourself around, and why?',
+    'What is one thing you can forgive yourself for today?',
+    'What would your calmest self say about this problem?',
+    'Which small habit has quietly improved your life?',
+    'What are you waiting for permission to do?',
+    'List five ordinary things you are glad to have.'
+  ];
+  var pi = 0;
+  $('promptText').textContent = prompts[0];
+  $('nextPrompt').addEventListener('click', function () {
+    var n; do { n = Math.floor(Math.random() * prompts.length); } while (n === pi);
+    pi = n; $('promptText').textContent = prompts[n];
+  });
+})();
+</script>
+</body>
+</html>
