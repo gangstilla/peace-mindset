@@ -90,6 +90,20 @@ h2 { font-size: clamp(2.1rem, 5vw, 3.5rem); }
 .practice { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) auto; gap: 8px clamp(20px, 5vw, 64px); align-items: baseline; padding-block: 26px; border-bottom: 1px solid var(--line); }
 .practice h3 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 400; line-height: 1.1; }
 .practice p { color: var(--muted); }
+.practice > div { min-width: 0; }
+.practice .hard { margin-top: 8px; font-size: 0.93rem; }
+.practice .hard b { font: 500 0.72rem var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-right: 10px; }
+.lapse { margin-top: 24px; color: var(--muted); max-width: 40em; }
+
+/* Plan builder */
+.plan-note { margin-top: 14px; max-width: 30em; color: var(--muted); font-size: 1.05rem; }
+.plan-form { display: grid; gap: 16px; margin-top: 28px; }
+.plan-form label { display: grid; gap: 6px; font: 400 0.76rem var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.plan-form input { width: 100%; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; font: 400 1rem var(--f-body); letter-spacing: 0; text-transform: none; }
+.plan-form input:focus-visible { outline-offset: 1px; border-color: var(--accent); }
+.plan-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.plan-out { margin-top: 12px; font: 300 clamp(1.5rem, 3vw, 2.1rem)/1.2 var(--f-display); letter-spacing: -0.02em; overflow-wrap: anywhere; color: var(--fg); }
+.need { margin-top: clamp(56px, 8vw, 104px); }
 .practice .time { font: 400 0.78rem var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
 
 /* Three pauses */
@@ -146,6 +160,7 @@ footer p { max-width: 50em; }
   <nav class="nav" aria-label="Sections">
     <a href="#breathe">Breathe</a>
     <a href="#practices">Practices</a>
+    <a href="#plan">Plan</a>
     <a href="#pauses">Pauses</a>
     <a href="#weather">Check in</a>
     <a href="#prompt">Write</a>
@@ -176,17 +191,45 @@ footer p { max-width: 50em; }
   <section class="sec" id="practices">
     <div class="sec-head">
       <p class="eyebrow">Practices</p>
-      <h2>Six things to try when your mind won't settle.</h2>
+      <h2>Nine things to try when your mind won't settle.</h2>
       <p class="sub">You need nothing for these except a few minutes. Pick one and give it a week before you decide.</p>
     </div>
     <ul class="practices">
-      <li class="practice"><h3>Name it to tame it</h3><p>Say what you feel in one word: "anxious", "irritated", "tired". Naming an emotion tends to take some of the heat out of it.</p><span class="time">30 sec</span></li>
-      <li class="practice"><h3>The long exhale</h3><p>Breathe in through your nose, then take a second short sip of air on top. Let it all out slowly through your mouth. Two or three rounds often slow things down.</p><span class="time">1 min</span></li>
-      <li class="practice"><h3>Five things, four, three</h3><p>Name five things you see, four you can touch, three you hear. It pulls attention out of the story in your head and into the room.</p><span class="time">2 min</span></li>
-      <li class="practice"><h3>Schedule the worry</h3><p>Pick a fifteen-minute window each day. When a worry shows up at other times, note it down and tell it to wait until then.</p><span class="time">15 min</span></li>
-      <li class="practice"><h3>One next step</h3><p>When everything feels heavy, write down the very next physical thing you could do. Open the email. Fill the kettle. That's all.</p><span class="time">2 min</span></li>
-      <li class="practice"><h3>Walk without a phone</h3><p>Ten minutes outside with nothing to listen to and nothing to scroll. It's boring for a while, and then it isn't.</p><span class="time">10 min</span></li>
+      <li class="practice"><h3>Name it to tame it</h3><div><p>Say what you feel in one word: "anxious", "irritated", "tired". Naming an emotion tends to take some of the heat out of it.</p><p class="hard"><b>On a hard day</b>Say the one word. That's it.</p></div><span class="time">30 sec</span></li>
+      <li class="practice"><h3>The long exhale</h3><div><p>Breathe in through your nose, then take a second short sip of air on top. Let it all out slowly through your mouth. Two or three rounds often slow things down.</p><p class="hard"><b>On a hard day</b>One slow breath out is plenty.</p></div><span class="time">1 min</span></li>
+      <li class="practice"><h3>Five things, four, three</h3><div><p>Name five things you see, four you can touch, three you hear. It pulls attention out of the story in your head and into the room.</p><p class="hard"><b>On a hard day</b>Name three things you can see.</p></div><span class="time">2 min</span></li>
+      <li class="practice"><h3>Schedule the worry</h3><div><p>Pick a fifteen-minute window each day. When a worry shows up at other times, note it down and tell it to wait until then.</p><p class="hard"><b>On a hard day</b>Jot the worry in one line. It can wait for tomorrow's window.</p></div><span class="time">15 min</span></li>
+      <li class="practice"><h3>One next step</h3><div><p>When everything feels heavy, write down the very next physical thing you could do. Open the email. Fill the kettle. That's all.</p><p class="hard"><b>On a hard day</b>Pick something tiny, like standing up.</p></div><span class="time">2 min</span></li>
+      <li class="practice"><h3>Walk without a phone</h3><div><p>Ten minutes outside with nothing to listen to and nothing to scroll. It's boring for a while, and then it isn't.</p><p class="hard"><b>On a hard day</b>Stand at a window or the door for two minutes.</p></div><span class="time">10 min</span></li>
+      <li class="practice"><h3>Before you say yes</h3><div><p>Check your energy and what this would push out of your week. Then say, "I'll have a look and come back to you."</p><p class="hard"><b>On a hard day</b>Say the sentence. You can work out the rest later.</p></div><span class="time">2 min</span></li>
+      <li class="practice"><h3>Rest or avoidance?</h3><div><p>Ask whether this break will leave you more able to choose, or just put off the thing that matters. Either answer is useful.</p><p class="hard"><b>On a hard day</b>If you can't tell, rest first and ask again later.</p></div><span class="time">1 min</span></li>
+      <li class="practice"><h3>A fairer answer</h3><div><p>Write down the harsh thought. Then what supports it and what doesn't. Finish with the reply you'd give a friend.</p><p class="hard"><b>On a hard day</b>Write only the reply you'd give a friend.</p></div><span class="time">5 min</span></li>
     </ul>
+    <p class="lapse">Missed a few days? Pick it up again at the next cue. Nothing resets here.</p>
+  </section>
+
+  <section class="sec" id="plan">
+    <div class="weather">
+      <div>
+        <p class="eyebrow">Make it a plan</p>
+        <h2 style="margin-top:16px">When this happens, I'll do that.</h2>
+        <p class="plan-note">Tying a practice to something you already do tends to make it stick. Fill in the blanks and keep the sentence.</p>
+        <form class="plan-form" id="planForm" autocomplete="off">
+          <label for="planWhen">When...<input id="planWhen" type="text" maxlength="80" placeholder="I fill the kettle"></label>
+          <label for="planDo">I'll...<input id="planDo" type="text" maxlength="80" placeholder="do the long exhale"></label>
+          <label for="planIf">If that gets in the way, I'll... (optional)<input id="planIf" type="text" maxlength="80" placeholder="do it before bed"></label>
+          <div class="plan-actions">
+            <button class="btn primary" type="submit">Save plan</button>
+            <button class="btn" type="button" id="planClear">Clear</button>
+          </div>
+        </form>
+      </div>
+      <div class="reading" aria-live="polite">
+        <p class="eyebrow">Your sentence</p>
+        <p class="plan-out" id="planOut"></p>
+        <p class="saved" id="planSaved" role="status"></p>
+      </div>
+    </div>
   </section>
 
   <section class="sec" id="pauses">
@@ -211,6 +254,15 @@ footer p { max-width: 50em; }
       </div>
       <div class="reading" id="reading" aria-live="polite"></div>
     </div>
+
+    <div class="weather need" id="need">
+      <div>
+        <p class="eyebrow">Facing a decision</p>
+        <h2 style="margin-top:16px">What do you need first?</h2>
+        <div class="opts" id="needOpts" role="group" aria-label="What you need first"></div>
+      </div>
+      <div class="reading" id="needReading" aria-live="polite"></div>
+    </div>
   </section>
 
   <section class="sec" id="prompt">
@@ -227,7 +279,6 @@ footer p { max-width: 50em; }
 <footer>
   <div class="row">
     <span>peace mindset</span>
-    <a href="https://gangstilla.github.io/trading-mindset/">Sister site: Trading Mindset →</a>
   </div>
   <p>These ideas are for general wellbeing and are not medical advice or a substitute for therapy. If you are struggling, please reach out to a doctor, a counsellor or someone you trust. If you are in immediate danger, contact your local emergency number.</p>
 </footer>
@@ -290,8 +341,8 @@ footer p { max-width: 50em; }
     'Clear': ['Clear and settled', 'Good. This is a useful moment to do something that needs a steady head, or to simply enjoy it without hunting for what might go wrong.', 'Put it to use', 'Do the one task you have been avoiding for ten minutes while you feel like this.'],
     'Restless': ['Restless and buzzing', 'Your body has energy with nowhere to go. Thinking harder rarely fixes this. Moving does.', 'Try the long exhale', 'Two sips in, one slow breath out, three rounds. Then walk for ten minutes.'],
     'Foggy': ['Foggy and slow', 'A foggy head often means you have too much open at once, or not enough sleep. Neither says anything about you.', 'Try one next step', 'Write down only the very next physical action, do that, and stop there.'],
-    'Stormy': ['Stormy and loud', 'Don't try to fix a strong feeling while it's at full volume. Give it somewhere to go first.', 'Name it, then wait', 'Say the feeling in one word. Do not send the message or make the call for twenty minutes.'],
-    'Flat': ['Flat and low', 'Nothing is wrong exactly, but nothing feels good either. Small, physical things help more than big plans.', 'Change the air', 'Step outside and drink a glass of water. Text one person, even if it's just "hi".']
+    'Stormy': ['Stormy and loud', 'Don\'t try to fix a strong feeling while it\'s at full volume. Give it somewhere to go first.', 'Name it, then wait', 'Say the feeling in one word. Do not send the message or make the call for twenty minutes.'],
+    'Flat': ['Flat and low', 'Nothing is wrong exactly, but nothing feels good either. Small, physical things help more than big plans.', 'Change the air', 'Step outside and drink a glass of water. Text one person, even if it\'s just "hi".']
   };
   var keys = Object.keys(W);
   var opts = '';
@@ -300,7 +351,7 @@ footer p { max-width: 50em; }
   function show(k, remembered) {
     Array.prototype.forEach.call($('opts').children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.k === k)); });
     if (!k) {
-      $('reading').innerHTML = '<p class="eyebrow">Your reading</p><h3>Pick the closest word.</h3><p>There's no wrong answer. You'll get one small thing to try.</p>';
+      $('reading').innerHTML = '<p class="eyebrow">Your reading</p><h3>Pick the closest word.</h3><p>There\'s no wrong answer. You\'ll get one small thing to try.</p>';
       return;
     }
     var w = W[k];
@@ -314,6 +365,73 @@ footer p { max-width: 50em; }
     var b = ev.target.closest('.opt'); if (!b) return;
     show(b.dataset.k, false);
     try { localStorage.setItem('peace-weather', b.dataset.k); } catch (e) {}
+  });
+
+  /* What do you need first */
+  var N = {
+    'Rest': ['Rest', 'Look after your energy before you judge the decision. Tired tends to make every option look worse.', 'First move', 'Sleep on it, or take a twenty-minute break, then look again.'],
+    'Clarity': ['Clarity', 'Pull the facts apart from the guesses. Then find the one piece you are missing.', 'First move', 'Write two lists: what you know, and what you are assuming. Circle the one thing to find out.'],
+    'Someone to talk to': ['Someone to talk to', 'A conversation can change what feels possible. Decisions often look different once you say them out loud.', 'First move', 'Pick one person and ask for ten minutes.'],
+    'A limit': ['A limit', 'Decide your limit before you agree to anything else.', 'First move', 'Write down the most time or energy you are willing to give. Check every offer against it.'],
+    'Nothing in particular': ['Nothing in particular', 'When nothing specific is missing, a small step you can undo usually teaches you more than a big commitment made under pressure.', 'First move', 'Pick one thing to try this week that you could take back.']
+  };
+  var nopts = '';
+  Object.keys(N).forEach(function (k) { nopts += '<button type="button" class="opt" data-k="' + k + '" aria-pressed="false">' + k + '</button>'; });
+  $('needOpts').innerHTML = nopts;
+  function showNeed(k) {
+    Array.prototype.forEach.call($('needOpts').children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.k === k)); });
+    if (!k) {
+      $('needReading').innerHTML = '<p class="eyebrow">First step</p><h3>Pick what fits best.</h3><p>You will get one short idea for where to start.</p>';
+      return;
+    }
+    var n = N[k];
+    $('needReading').innerHTML = '<p class="eyebrow">' + k + '</p><h3>' + n[0] + '</h3><p>' + n[1] + '</p><div class="try"><b>' + n[2] + '</b>' + n[3] + '</div>';
+  }
+  showNeed(null);
+  $('needOpts').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.opt'); if (!b) return;
+    showNeed(b.dataset.k);
+  });
+
+  /* When / I'll plan */
+  var PLAN_KEY = 'peace-plan';
+  function clean(v) { return v.trim().replace(/[.\s]+$/, ''); }
+  function sentence() {
+    var w = clean($('planWhen').value), d = clean($('planDo').value), i = clean($('planIf').value);
+    if (!w || !d) return '';
+    var s = 'When ' + w + ", I'll " + d + '.';
+    if (i) s += " If that gets in the way, I'll " + i + '.';
+    return s;
+  }
+  function drawPlan() { $('planOut').textContent = sentence() || 'Fill in the first two boxes and your sentence shows up here.'; }
+  try {
+    var saved = JSON.parse(localStorage.getItem(PLAN_KEY) || 'null');
+    if (saved && typeof saved === 'object') {
+      $('planWhen').value = typeof saved.w === 'string' ? saved.w : '';
+      $('planDo').value = typeof saved.d === 'string' ? saved.d : '';
+      $('planIf').value = typeof saved.i === 'string' ? saved.i : '';
+      if (sentence()) $('planSaved').textContent = 'Saved on this device.';
+    }
+  } catch (e) {}
+  drawPlan();
+  ['planWhen', 'planDo', 'planIf'].forEach(function (id) {
+    $(id).addEventListener('input', function () { drawPlan(); $('planSaved').textContent = ''; });
+  });
+  $('planForm').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!sentence()) { $('planSaved').textContent = 'Fill in the first two boxes first.'; return; }
+    try {
+      localStorage.setItem(PLAN_KEY, JSON.stringify({ w: clean($('planWhen').value), d: clean($('planDo').value), i: clean($('planIf').value) }));
+      $('planSaved').textContent = 'Saved on this device.';
+    } catch (e) {
+      $('planSaved').textContent = "Couldn't save here, but your sentence is above.";
+    }
+  });
+  $('planClear').addEventListener('click', function () {
+    ['planWhen', 'planDo', 'planIf'].forEach(function (id) { $(id).value = ''; });
+    try { localStorage.removeItem(PLAN_KEY); } catch (e) {}
+    drawPlan();
+    $('planSaved').textContent = 'Cleared.';
   });
 
   /* Writing prompts */
